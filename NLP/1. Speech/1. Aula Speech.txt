@@ -80,6 +80,15 @@ https://learn.microsoft.com/pt-br/azure/ai-services/speech-service/get-started-s
 
 https://convertio.co/pt/m4a-ogg/
 
+-------------------------------
+
+Debian GNU/Linux
+
+sudo apt install ffmpeg
+
+ffmpeg -i entrada.m4a -c:a libvorbis -q:a 5 saida.ogg
+
+-------------------------------
 
 
 ✔ 2. Acessar API do serviço Speech usando curl.
