@@ -38,7 +38,7 @@ client = authenticate_client()
 # Example method for detecting sentiment and opinions in text 
 def sentiment_analysis_with_opinion_mining_example(client):
 
-    texto = input('\nDigite ou cole um texto para Análise de sentimento:\n\n')
+    texto = input('\n\nDigite ou cole um texto para Análise de sentimento:\n\n')
     print() 
 
     documents = [texto]
