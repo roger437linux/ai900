@@ -1,0 +1,149 @@
+
+🍀 Azure AI Services 🍀
+
+😃 Texto em fala [Síntese] Sintetização de voz
+
+
+** Microsoft Azure Text to Speech Voices.
+
+https://play.ht/text-to-speech-voices/microsoft-azure/
+
+
+** Início Rápido: converta texto em fala
+
+https://learn.microsoft.com/pt-br/azure/ai-services/speech-service/get-started-text-to-speech?tabs=linux%2Cterminal&pivots=programming-language-rest
+
+
+
+⚽ Acessar API do serviço Speech usando curl no Git Bash.
+
+SPEECH_KEY=your-key
+SPEECH_REGION=your-region
+
+
+curl --location --request POST "https://${SPEECH_REGION}.tts.speech.microsoft.com/cognitiveservices/v1" \
+--header "Ocp-Apim-Subscription-Key: ${SPEECH_KEY}" \
+--header 'Content-Type: application/ssml+xml' \
+--header 'X-Microsoft-OutputFormat: audio-16khz-128kbitrate-mono-mp3' \
+--header 'User-Agent: curl' \
+--data-raw '<speak version='\''1.0'\'' xml:lang='\''pt-BR'\''>
+    <voice xml:lang='\''pt-BR'\'' xml:gender='\''Female'\'' name='\''pt-BR-GiovannaNeural'\''>
+        Ainda que eu falasse a lingua dos homens, 
+        e falasse a lingua dos anjos,
+        sem amor, eu nada seria
+    </voice>
+</speak>' > output.mp3
+
+
+⚽ Acessar a API usando Postman/Insomnia/Thunder Client.
+
+[POST] https://<LOCALIZAÇÃO/REGIÃO>.tts.speech.microsoft.com/cognitiveservices/v1
+
+
+➡ Headers
+
+Ocp-Apim-Subscription-Key	|	CHAVE 1
+Content-Type			|	application/ssml+xml
+X-Microsoft-OutputFormat    	|   	audio-16khz-128kbitrate-mono-mp3
+
+
+➡ Body [raw] ou [XML]
+
+<speak version='1.0' xml:lang='pt-BR'>
+    <voice xml:lang='pt-BR' xml:gender='Female' name='pt-BR-GiovannaNeural'>
+        Aqui fica o texto para ser transcrito em audio.
+    </voice>
+</speak>
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
+
+
+😃 Fala em texto    [Reconhecimento] de fala
+
+
+✔ 1. Criar Serviço de Fala [Speech service]
+
+
+❄ Documentação:
+
+❄ Incio rápido: reconhecer e converter fala em texto.
+
+https://learn.microsoft.com/pt-br/azure/ai-services/speech-service/get-started-speech-to-text?tabs=linux%2Cterminal&pivots=programming-language-rest
+
+
+
+✔ 1.1 Criar um arquivo M4A usando o "Gravador de Voz do Windows".
+
+
+1.2 Converter para ogg ou wav.
+
+https://convertio.co/pt/m4a-ogg/
+
+
+
+✔ 2. Acessar API do serviço Speech usando curl.
+
+
+✔ 2.1 Criar as variáveis de ambiente usando o Git Bash.
+
+
+SPEECH_KEY=your-key
+
+SPEECH_REGION=your-region
+
+IDIOMA=pt-BR
+
+[en-US]
+[es-ES]
+
+
+audio_file=@'YourAudioFile.ogg'
+
+
+
+✔ 2.2 Acessar a API do servidor Speech com comando curl.
+
+curl --location --request POST \
+"https://${SPEECH_REGION}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=$IDIOMA&format=detailed" \
+--header "Ocp-Apim-Subscription-Key: ${SPEECH_KEY}" \
+--header "Content-Type: audio/wav" \
+--data-binary $audio_file
+
+
+
+❎ Obs.: Se usar o operador de redirecionamento no final '>', para formatar o arquivo json on-line:
+
+https://jsonformatter.curiousconcept.com/
+
+
+
+❎ Obs.: Entendendo a URL
+
+https://${SPEECH_REGION}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=$IDIOMA&format=detailed
+
+https://eastus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=pt-BR&format=detailed
+
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
+
+
+✔ 3. Acessar a API usando Postman/Insomnia/Thunder Client
+
+
+[POST] https://<LOCALIZAÇÃO/REGIÃO>.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=pt-BR&format=detailed
+
+
+➡ Headers
+
+Ocp-Apim-Subscription-Key	|	CHAVE 1
+Content-Type			|	audio/ogg
+
+
+➡ Body
+
+binary	[selecionar arquivo .ogg]
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀

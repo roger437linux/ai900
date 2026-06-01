@@ -1,0 +1,146 @@
+
+🍀 Arquivos para uso com Azure Speech - Texto em fala 🍀
+
+
+https://github.com/roger437unix/azure-speech-textoEmFala
+
+
+
+
+⚽ 0. Em "Azure AI services", criar o serviço "Speech".
+
+ 
+▶ Alterar no arquivo app.js
+
+const SPEECH_KEY=''
+
+const SPEECH_REGION='eastus'
+
+
+
+
+⚽ 1. Configuração repositório Git Hub
+
+- Menu Settings ▶ Pages ▶ Branch [Main] Save
+
+⚡ Voltar para tela do repo
+
+    ▶ Edit repository details [ícone da engrenagem após "About"] 
+
+        ▶ Marcar: Use your GitHub Pages website 
+
+            ▶ Save changes
+
+
+
+
+⚽ 2. Docker
+
+
+git clone https://github.com/roger437unix/azure-speech-textoEmFala.git speech
+
+
+docker run -d --rm --name speech -p 8080:80 -v $(pwd)/speech:/usr/share/nginx/html nginx
+
+
+⚡ No navegador:
+
+http://192.168.56.102:8080/
+
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+
+[app.js]
+
+async function textoParaAudio  (texto) {
+    const SPEECH_KEY='d7d18aa8f319462a883b0464b0f7f0ad'
+    const SPEECH_REGION='eastus'
+    const url = `https://${SPEECH_REGION}.tts.speech.microsoft.com/cognitiveservices/v1`
+
+
+    const data = `
+        <speak version='1.0' xml:lang='pt-BR'>
+            <voice xml:lang='pt-BR' xml:gender='Female' name='pt-BR-GiovannaNeural'>
+                ${texto}
+            </voice>
+        </speak>
+    `
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Ocp-Apim-Subscription-Key': SPEECH_KEY,
+            'Content-Type': 'application/ssml+xml',
+            'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3'
+          },
+        body: data,
+
+    }
+    
+    const response  = await fetch(url, options)
+    const datablob = await response.blob()
+
+    return datablob
+
+
+}
+
+const playAudio = async () => {
+
+    const audioPlayer = document.getElementById('player');
+    const texto = document.getElementById('texto').value
+
+
+    const blobAudio = await textoParaAudio(texto)
+
+    const objectURL = URL.createObjectURL(blobAudio);
+    audioPlayer.src = objectURL;
+    
+
+}
+
+document.getElementById('converter')
+        .addEventListener('click', () => playAudio())
+
+
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+
+
+[index.html]
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./app.js" defer></script>
+    <title>Texto em fala</title>
+</head>
+<body>
+    <div style="text-align:center">
+        <h1>Azure Speech Service</h1>
+        <textarea id="texto" cols="50" rows="12"></textarea><br><br>
+        <button id="converter">Converter</button><br><br>
+        <h3>Executar</h3>
+        <audio controls id="player">
+            <source src="" type="audio/mpeg">
+            Seu navegador não suporta a tag de áudio.
+        </audio>
+    </div>
+</body>
+</html>
+
+
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./app.js" defer></script>
+    <title>Texto em fala</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div style="text-align:center"><br>
+        <h1>Azure Speech Service</h1>
+        <p style="font-size: 25px; font-family: monospace;  color: rgb(66, 39, 2);">Escreva um texto</p>
+        <textarea id="texto" cols="50" rows="12"></textarea><br><br>
+        <button id="converter">Converter</button><br><br>
+        <h3>Executar</h3>
+        <audio controls id="player">
+            <source src="" type="audio/mpeg">
+            Seu navegador não suporta a tag de áudio.
+        </audio>
+    </div>
+</body>
+</html> 

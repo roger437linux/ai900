@@ -1,0 +1,206 @@
+
+🍊 Azure AI services🍊
+
+🍀 Serviços de Idioma do Azure [Language Service] 🍀
+
+⭐ Documentação da Linguagem de IA do Azure
+
+https://learn.microsoft.com/pt-br/azure/ai-services/language-service/
+
+
+
+⭐ Análise de texto
+
+- Sentiment analysis				[Análise de sentimentos]
+
+- Key phrase extraction				[Extração de frase-chave]
+
+- Pre-built question answering			[Resposta a perguntas pré-construídas]
+
+- Conversational language understanding		[Compreensão da linguagem conversacional]
+
+- Named entity recognition			[Reconhecimento de entidade nomeada]
+
+- Text Summarization				[Resumo de texto]
+
+- Text analytics for Health			[Análise de texto para Saúde]
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
+
+
+⭐ Criar Serviço de Idiomas do Azure [Language Service]
+
+⚽ Obs.: Em Contas de armazenamento.
+
+- LRS [Locally-Redundant Storage]       ==>     Armazenamento localmente redundante
+Replica dados de forma síncrona para três discos em um datacenter na região primária. 
+Oferece um nível moderado de disponibilidade a um custo menor.
+
+- ZRS [Zone-Redundant Storage]          ==>     Armazenamento com redundância de zona
+Replica dados de forma síncrona entre três zonas de disponibilidade do Azure na região primária. 
+Fornece um nível mais alto de resiliência a um custo mais alto.
+
+- GRS [Geo-Redundant Storage]           ==>     Armazenamento com redundância geográfica
+Armazena outras três cópias de dados em uma região emparelhada do Azure
+
+- RA-GRS [Read-Access Geo-Redundant]    ==>     Acesso de leitura com redundância geográfica
+O mesmo que GRS, mas permite que os dados sejam lidos de ambas as regiões do Azure    
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
+
+
+⭐ Idiomas disponíveis para Language Service  [Language support for Language features]
+
+https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/language-support
+
+
+Obs.: O código do idioma é informado no corpo da requisição.
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
+
+
+⭐ Análise de texto [Documentação]
+
+https://learn.microsoft.com/pt-br/rest/api/language/2023-04-01/text-analysis-runtime/analyze-text?tabs=HTTP
+
+
+🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
+
+
+⭐ Acessar API com client Postman/Insomnia/Thunder
+ 
+_____
+POST | <ENDPOINT>/language/:analyze-text?api-version=2023-04-01
+
+++ Headers
+
+Ocp-Apim-Subscription-Key	|	CHAVE 1
+Content-Type			        |	application/json
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+++ Body [JSON]
+
+
+😃 Reconhecimento de entidade [Recognition Request]
+
+
+{
+  "kind": "EntityRecognition",
+  "parameters": {
+    "modelVersion": "latest"
+  },
+  "analysisInput": {
+    "documents": [
+      {
+        "id": "1",
+        "language": "pt-br",
+        "text": "O Brasil foi decoberto por Pedro Alvares Cabral, navegador português do final do século XV."
+      },
+      {
+        "id": "2",
+        "language": "es",
+        "text": "Cuando estoy en Bogota, me gusta mucho caminar por el centro de la ciudad."
+      }
+    ]
+  }
+}
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+😃 Extração de frase-chave [Key Phrase Extraction]
+
+
+{
+  "kind": "KeyPhraseExtraction",
+  "parameters": {
+    "modelVersion": "latest"
+  },
+  "analysisInput": {
+    "documents": [
+      {
+        "id": "1",
+        "language": "en",
+        "text": "Microsoft was founded by Bill Gates and Paul Allen."
+      },
+      {
+        "id": "2",
+        "language": "pt-br",
+        "text": "Analise de texto é um dos serviços cognitivos da Azure."
+      },
+      {
+        "id": "3",
+        "language": "es",
+        "text": "Necesito llevar a mi gato al veterinario."
+      }
+    ]
+  }
+}
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+😃 Detecão de idioma [Language Detection]
+
+
+{
+  "kind": "LanguageDetection",
+  "parameters": {
+    "modelVersion": "latest"
+  },
+  "analysisInput": {
+    "documents": [
+      {
+        "id": "1",
+        "text": "Hello world"
+      },
+      {
+        "id": "2",
+        "text": "Bonjour tout le monde"
+      },
+      {
+        "id": "3",
+        "text": "Hola mundo"
+      }
+    ]
+  }
+}
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
+
+
+😃 Análise de sentimento [Sentiment Analysis]
+
+
+{
+  "kind": "SentimentAnalysis",
+  "parameters": {
+    "modelVersion": "latest"
+  },
+  "analysisInput": {
+    "documents": [
+      {
+        "id": "1",
+        "language": "pt-br",
+        "text": "Odeio ser chamado de senhor, até parece que sou velho."
+      },
+      {
+        "id": "2",
+        "language": "es",
+        "text": "Hoy estoy muy feliz viendo brillar el sol."
+      }
+    ]
+  }
+}
+
+
+❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄
